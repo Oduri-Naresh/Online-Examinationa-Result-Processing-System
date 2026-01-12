@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ExamPortal</title>
+
+    <!-- CORRECT CSS LINK -->
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">🎓 ExamPortal</div>
+
+    <div class="nav-right">
+        <a href="{% url 'home' %}" class="nav-home">Home</a>
+
+        <div class="login-dropdown">
+            <div class="login-btn">
+                Login <span class="arrow">▾</span>
+            </div>
+
+            <div class="dropdown-menu">
+                <a href="{% url 'student_login' %}">Student Login</a>
+                <a href="{% url 'faculty_login' %}">Faculty Login</a>
+                <a href="{% url 'admin_login' %}">Admin Login</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-left">
+        <span class="badge">SMART • SECURE • SCALABLE</span>
+
+        <h1>
+            Online Examination <br>
+            <span>Result Processing System</span>
+        </h1>
+
+        <p>
+            A secure and automated platform to conduct online exams,
+            evaluate answers instantly, and generate accurate results.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="{% url 'student_login' %}" class="btn primary">Student Login</a>
+            <a href="{% url 'faculty_login' %}" class="btn secondary">Faculty Login</a>
+
+        </div>
+    </div>
+
+    <div class="hero-right">
+        <!-- CORRECT IMAGE PATH -->
+        <img src="{% static 'images/exam-hero.png' %}" alt="Online Exam Illustration">
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features">
+    <h2 class="features-title">Why Choose ExamPortal?</h2>
+    <p class="features-subtitle">
+        A complete, secure, and automated solution designed for modern online examination systems.
+    </p>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">⏱</div>
+            <h3>Timed Online Exams</h3>
+            <p>
+                Exams automatically start and submit based on predefined
+                schedules and duration.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Automatic Evaluation</h3>
+            <p>
+                Answers are evaluated instantly and results are
+                generated accurately without manual effort.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🔐</div>
+            <h3>Secure Authentication</h3>
+            <p>
+                Role-based login ensures secure access for students
+                and faculty members.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📈</div>
+            <h3>Performance Analytics</h3>
+            <p>
+                Interactive dashboards help analyze exam performance
+                and track student progress.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2025 ExamPortal | Python Django Full Stack Project</p>
+    <p>Designed for Academic & Real-World Learning</p>
+</footer>
+
+</body>
+<script>
+    const loginBtn = document.querySelector(".login-btn");
+    const dropdown = document.querySelector(".login-dropdown");
+
+    loginBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle("active");
+    });
+
+    document.addEventListener("click", function () {
+        dropdown.classList.remove("active");
+    });
+</script>
+
+</html>

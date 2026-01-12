@@ -1,0 +1,158 @@
+{% extends 'student/base.html' %}
+{% block title %}Start Exam{% endblock %}
+
+{% block extra_css %}
+<style>
+/* ===== Start Exam Page ===== */
+
+.exam-wrapper{
+    background: white;
+    padding: 35px;
+    border-radius: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    max-width: 900px;
+}
+
+/* Header */
+.exam-header{
+    margin-bottom: 25px;
+}
+
+.exam-header h2{
+    color: #6a42c2;
+    margin-bottom: 6px;
+}
+
+.exam-header p{
+    color: #777;
+}
+
+/* Info Row */
+.exam-info{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.info-box{
+    background: #f5f1ff;
+    padding: 20px;
+    border-radius: 18px;
+    text-align: center;
+}
+
+.info-box h3{
+    color: #8e63e7;
+    font-size: 26px;
+    margin-bottom: 6px;
+}
+
+.info-box p{
+    color: #555;
+    font-weight: 600;
+}
+
+/* Instructions */
+.instructions{
+    background: #faf8ff;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 35px;
+}
+
+.instructions h3{
+    color: #6a42c2;
+    margin-bottom: 15px;
+}
+
+.instructions ul{
+    padding-left: 20px;
+}
+
+.instructions li{
+    margin-bottom: 10px;
+    color: #444;
+}
+
+/* Start Button */
+.start-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
+    background: #8e63e7;
+    color: white;
+    border-radius: 16px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.start-btn:hover{
+    background: #7a52d6;
+}
+
+/* Play Icon */
+.play-icon{
+    font-size: 18px;
+}
+
+/* Responsive */
+@media(max-width: 800px){
+    .exam-info{
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="exam-wrapper">
+
+    <!-- Header -->
+    <div class="exam-header">
+        <h2>Python Basics</h2>
+        <p>Please read the instructions carefully before starting the exam</p>
+    </div>
+
+    <!-- Exam Info -->
+    <div class="exam-info">
+        <div class="info-box">
+            <h3>30</h3>
+            <p>Minutes</p>
+        </div>
+
+        <div class="info-box">
+            <h3>20</h3>
+            <p>Total Questions</p>
+        </div>
+
+        <div class="info-box">
+            <h3>1</h3>
+            <p>Attempt Allowed</p>
+        </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions">
+        <h3>Exam Instructions</h3>
+        <ul>
+            <li>The exam is time-bound. Once started, the timer cannot be paused.</li>
+            <li>Each question carries equal marks.</li>
+            <li>There is no negative marking.</li>
+            <li>Do not refresh or close the browser during the exam.</li>
+            <li>Ensure a stable internet connection.</li>
+        </ul>
+    </div>
+
+    <!-- Start Exam Button -->
+    <a href="{% url 'starts_exam' exam.id %}" class="start-btn">
+        <span class="play-icon">▶</span>
+        Start Exam
+    </a>
+
+</div>
+
+{% endblock %}

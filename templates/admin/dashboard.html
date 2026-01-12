@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | ExamSphere</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+    <div class="logo">🎓 ExamPortal</div>
+    <div class="top-actions">
+        <a href="#">Dashboard</a>
+        <a href="#">Profile</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+</header>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h3>Admin</h3>
+        <a class="active" href="#">📊 Dashboard</a>
+        <a href="#">👨‍🏫 Pending Faculty</a>
+        <a href="#">👥 Manage Users</a>
+        <a href="#">📜 Activity Logs</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+        <h2 class="page-title">🛡 Admin Dashboard</h2>
+
+        <!-- STATS -->
+        <div class="stats">
+            <div class="card">
+                <h1>{{ faculty_count }}</h1>
+                <p>Total Faculty</p>
+            </div>
+            <div class="card">
+                <h1>{{ students_count }}</h1>
+                <p>Total Students</p>
+            </div>
+            <div class="card">
+                <h1>{{ pending_count }}</h1>
+                <p>Pending Approvals</p>
+            </div>
+        </div>
+
+        <!-- PENDING FACULTY -->
+        <section class="panel">
+            <div class="panel-header">👨‍🏫 Pending Faculty Approvals</div>
+
+            {% if pending_faculty %}
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for f in pending_faculty %}
+                    <tr>
+                        <td>{{ f.full_name }}</td>
+                        <td>{{ f.department }}</td>
+                        <td><span class="badge pending">Pending</span></td>
+                        <td>
+                            <a href="{% url 'approve_faculty' f.id %}" class="btn approve">✔ Approve</a>
+                            <a href="{% url 'reject_faculty' f.id %}" class="btn reject">✖ Reject</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p class="empty">🎉 No pending approvals</p>
+            {% endif %}
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>

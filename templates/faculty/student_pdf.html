@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table { width:100%; border-collapse: collapse; }
+        th, td { border:1px solid #000; padding:8px; text-align:left; }
+        th { background:#eee; }
+    </style>
+</head>
+<body>
+
+<h2>Student List</h2>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Reg No</th>
+        <th>Avg Pass %</th>
+    </tr>
+    {% for item in student_data %}
+    <tr>
+        <td>{{ item.student.full_name }}</td>
+        <td>{{ item.student.department }}</td>
+        <td>{{ item.student.student_id }}</td>
+        <td>{{ item.avg_pass }}%</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

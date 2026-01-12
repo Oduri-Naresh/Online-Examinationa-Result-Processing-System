@@ -1,0 +1,164 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}Student Panel{% endblock %}</title>
+
+<style>
+/* ===== GLOBAL RESET ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+/* IMPORTANT: Full height */
+html, body{
+    height: 100%;
+}
+
+body{
+    background:#ede7f6;
+}
+
+/* ===== LAYOUT ===== */
+.container{
+    display:flex;
+    min-height: calc(100vh - 50px); /* FIXED HEIGHT */
+    width:95%;
+    margin:25px auto;
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+    width:240px;
+    background:#8e63e7;
+    color:white;
+    padding:25px 20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:40px;
+    font-size:18px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:12px 15px;
+    margin:10px 0;
+    border-radius:8px;
+}
+
+.sidebar a:hover{
+    background:rgba(255,255,255,0.2);
+}
+
+.sidebar a.active{
+    background:rgba(255,255,255,0.3);
+    font-weight:600;
+    border-left:4px solid #fff;
+}
+
+/* ===== LOGOUT ===== */
+.logout a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:#fff;
+    color:#8e63e7;
+    padding:10px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+}
+.alert-success{
+    background:#22c55e;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
+    font-weight:600;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main{
+    flex:1;
+    padding:30px;
+    background:#f7f5fc;
+    overflow-y:auto; /* allows scroll if content is long */
+}
+
+</style>
+
+{% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div>
+            <div class="profile">
+                🎓 <strong>Student</strong>
+            </div>
+
+            <a href="{% url 'student_dashboard' %}"
+               class="{% if active_page == 'dashboard' %}active{% endif %}">
+               Dashboard
+            </a>
+
+            <a href="{% url 'student_profile' %}"
+               class="{% if active_page == 'profile' %}active{% endif %}">
+               Profile
+            </a>
+
+            <a href="{% url 'available_exams' %}"
+               class="{% if active_page == 'exams' %}active{% endif %}">
+               Available Exams
+            </a>
+
+            <a href="{% url 'exam_history' %}"
+               class="{% if active_page == 'history' %}active{% endif %}">
+               Exam History
+            </a>
+        </div>
+
+        <div class="logout">
+            <a href="{% url 'logout' %}">⎋ Logout</a>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+        {% block content %}{% endblock %}
+    </div>
+
+</div>
+
+</body>
+</html>

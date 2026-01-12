@@ -1,0 +1,206 @@
+{% extends 'student/base.html' %}
+{% block title %}Profile{% endblock %}
+
+{% block extra_css %}
+<style>
+/* ===== Profile Page ===== */
+
+.profile-wrapper{
+    background: white;
+    padding: 35px;
+    border-radius: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    max-width: 900px;
+}
+
+/* Header */
+.profile-header{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+/* Profile Image */
+.profile-pic-wrapper{
+    text-align: center;
+}
+
+.profile-pic{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #8e63e7;
+}
+
+/* Upload Button */
+.upload-btn{
+    margin-top: 10px;
+    display: inline-block;
+    padding: 6px 14px;
+    background: #8e63e7;
+    color: white;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.upload-btn:hover{
+    background: #7a52d6;
+}
+
+.upload-input{
+    display: none;
+}
+
+/* Name Section */
+.profile-header h2{
+    color: #6a42c2;
+    margin-bottom: 5px;
+}
+
+.profile-header p{
+    color: #777;
+}
+
+/* Info Grid */
+.info-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.info-card{
+    background: #f5f1ff;
+    padding: 22px;
+    border-radius: 18px;
+}
+
+.info-card label{
+    display: block;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.info-card span{
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Edit Button */
+.edit-btn{
+    display: inline-block;
+    padding: 12px 22px;
+    background: #8e63e7;
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.edit-btn:hover{
+    background: #7a52d6;
+}
+
+/* Responsive */
+@media(max-width: 700px){
+    .profile-header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-grid{
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-wrapper">
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+
+        <!-- Profile Picture -->
+        <div class="profile-pic-wrapper">
+            <!-- Default avatar shown if student skips upload -->
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png"
+                 id="profileImage"
+                 class="profile-pic"
+                 alt="Default Profile Picture">
+
+            <label class="upload-btn">
+                Change Photo
+                <input type="file"
+                       class="upload-input"
+                       accept="image/*"
+                       onchange="previewImage(event)">
+            </label>
+        </div>
+
+        <!-- Student Name -->
+        <div>
+            <h2>Student Name</h2>
+            <p>B.Tech – Computer Science</p>
+        </div>
+
+    </div>
+
+    <!-- Profile Information -->
+    <div class="info-grid">
+
+        <div class="info-card">
+            <label>Email</label>
+            <span>student@email.com</span>
+        </div>
+
+        <div class="info-card">
+            <label>Roll Number</label>
+            <span>CS21A001</span>
+        </div>
+
+        <div class="info-card">
+            <label>Year</label>
+            <span>3rd Year</span>
+        </div>
+
+        <div class="info-card">
+            <label>Semester</label>
+            <span>6th Semester</span>
+        </div>
+
+        <div class="info-card">
+            <label>Phone</label>
+            <span>+91 9XXXXXXXXX</span>
+        </div>
+
+        <div class="info-card">
+            <label>Status</label>
+            <span>Active</span>
+        </div>
+
+    </div>
+
+    <!-- Action -->
+    <a href="#" class="edit-btn">Edit Profile</a>
+
+</div>
+
+<!-- Image Preview Script -->
+<script>
+function previewImage(event){
+    const reader = new FileReader();
+    reader.onload = function(){
+        document.getElementById('profileImage').src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+
+{% endblock %}

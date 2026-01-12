@@ -1,0 +1,134 @@
+{% extends 'student/base.html' %}
+{% block title %}Exam History{% endblock %}
+
+{% block extra_css %}
+<style>
+/* ===== Exam History Page ===== */
+
+.page-title{
+    font-size: 26px;
+    font-weight: 600;
+    color: #6a42c2;
+    margin-bottom: 25px;
+}
+
+/* Wrapper */
+.history-wrapper{
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* Table */
+.history-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th{
+    text-align: left;
+    padding: 14px;
+    font-size: 14px;
+    color: #555;
+    border-bottom: 2px solid #eee;
+}
+
+.history-table td{
+    padding: 16px 14px;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+    color: #333;
+    vertical-align: middle;
+}
+
+/* Score */
+.score{
+    font-weight: 600;
+    color: #6a42c2;
+}
+
+/* Status Badges */
+.badge{
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.pass{
+    background: #e7f7ef;
+    color: #2e8b57;
+    font-weight: bold;
+}
+
+.fail{
+    background: #fdecea;
+    color: #c0392b;
+    font-weight: bold;
+}
+
+/* View Result Button */
+.view-btn{
+    padding: 8px 16px;
+    background: #8e63e7;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.view-btn:hover{
+    background: #7a52d6;
+}
+
+/* Responsive */
+@media(max-width: 900px){
+    .history-table th,
+    .history-table td{
+        font-size: 13px;
+        padding: 12px 8px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-title">Exam History</div>
+
+<div class="history-wrapper">
+
+    <table class="history-table">
+
+<tr>
+  <th>Exam</th>
+  <th>Date</th>
+  <th>Status</th>
+  <th>Score</th>
+  <th>Result</th>
+</tr>
+
+{% for a in attempts %}
+<tr>
+  <td>{{ a.exam.title }}</td>
+  <td>{{ a.submitted_at|date:"d M Y" }}</td>
+  <td>{{ a.status }}</td>
+  <td>{{ a.score }}</td>
+  <td>
+    {% if a.result == 'PASS' %}
+                <span class="pass">PASS</span>
+            {% else %}
+                <span class="fail">FAIL</span>
+            {% endif %}
+  </td>
+</tr>
+{% endfor %}
+</table>
+
+</div>
+
+{% endblock %}

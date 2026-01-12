@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial; background:#f4f6f8; padding:20px }
+        .card { background:#fff; padding:20px; border-radius:8px; margin-bottom:20px }
+        table { width:100%; border-collapse:collapse }
+        th, td { padding:10px; border-bottom:1px solid #ddd }
+        th { background:#f1f5f9 }
+        .btn-danger { background:#dc2626; color:white; padding:8px 12px; border:none; cursor:pointer }
+    </style>
+</head>
+<body>
+
+<h2>🎓 Student Profile</h2>
+
+<div class="card">
+    <p><b>Name:</b> {{ student.full_name }}</p>
+    <p><b>Department:</b> {{ student.department }}</p>
+    <p><b>Register No:</b> {{ student.student_id }}</p>
+</div>
+<h3>📄 Exam History</h3>
+
+<div class="card">
+<table>
+    <tr>
+        <th>Exam</th>
+        <th>Marks</th>
+        <th>Status</th>
+        <th>Violations</th>
+    </tr>
+
+    {% for a in attempts %}
+    <tr>
+        <td>{{ a.exam.title }}</td>
+        <td>{{ a.marks }}</td>
+        <td>
+            {% if a.marks >= a.exam.pass_marks %}
+                <span style="color:green;">Pass</span>
+            {% else %}
+                <span style="color:red;">Fail</span>
+            {% endif %}
+        </td>
+        <td>{{ a.violation_count }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">No exams attempted</td></tr>
+    {% endfor %}
+</table>
+</div>
+<h3>📊 Pass Percentage</h3>
+
+<div class="card">
+    <canvas id="passChart"></canvas>
+</div>
+{{ passed_count|json_script:"passed-data" }}
+{{ failed_count|json_script:"failed-data" }}
+
+<script>
+    const passed = Number("{{ passed_count }}");
+    const failed = Number("{{ failed_count }}");
+
+    const ctx = document.getElementById('passChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Passed', 'Failed'],
+            datasets: [{
+                data: [passed, failed],
+                backgroundColor: ['#22c55e', '#ef4444']
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+
+<form method="POST" action="{% url 'faculty_delete_student' student.id %}">
+    {% csrf_token %}
+    <button class="btn-danger"
+        onclick="return confirm('Are you sure you want to delete this student?');">
+        🗑 Delete Student
+    </button>
+</form>
+
+<br>
+<a href="{% url 'faculty_students' %}">⬅ Back</a>
+
+</body>
+</html>

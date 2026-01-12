@@ -1,0 +1,97 @@
+{% extends 'student/base.html' %}
+{% block title %}Available Exams{% endblock %}
+
+{% block extra_css %}
+<style>
+/* ===== Available Exams Page ===== */
+
+.page-title{
+    font-size: 26px;
+    font-weight: 600;
+    color: #6a42c2;
+    margin-bottom: 30px;
+}
+
+/* Exam Grid */
+.exam-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Exam Card */
+.exam-card{
+    background: white;
+    padding: 25px;
+    border-radius: 22px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Exam Text */
+.exam-card h3{
+    color: #6a42c2;
+    margin-bottom: 10px;
+}
+
+.exam-card p{
+    color: #555;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+/* Start Button */
+.start-btn{
+    margin-top: 18px;
+    align-self: flex-end;
+    padding: 10px 18px;
+    background: #8e63e7;
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.start-btn:hover{
+    background: #7a52d6;
+}
+
+/* Responsive */
+@media(max-width: 1000px){
+    .exam-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 650px){
+    .exam-grid{
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-title">Available Exams</div>
+
+{% for exam in exams %}
+<div class="exam-card">
+    <h4>{{ exam.title }}</h4>
+    <p>Duration: {{ exam.duration }} mins</p>
+    <a href="{% url 'student_start_exam' exam.id %}" class="play-btn">
+        ▶ Start
+    </a>
+</div>
+{% empty %}
+<p>No active exams available</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}

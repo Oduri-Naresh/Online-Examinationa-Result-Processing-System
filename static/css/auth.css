@@ -1,0 +1,174 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* PAGE BACKGROUND */
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #636081, #3d497d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* CONTAINER */
+.auth-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* AUTH BOX (LOGIN + REGISTER) */
+.auth-box {
+    background: rgba(255,255,255,0.1);
+    padding: 40px;
+    border-radius: 20px;
+    width: 380px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    text-align: center;
+}
+/* BACK BUTTON */
+.back-btn {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateX(-4px);
+}
+
+
+/* REGISTER BOX WIDTH */
+.register-box {
+    width: 520px;
+}
+
+/* HEADINGS */
+.auth-box h2 {
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+/* GRID FOR REGISTRATION */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+/* INPUTS & SELECT */
+.auth-box input,
+.auth-box select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Reduce gap specifically for login inputs */
+.auth-box input:first-of-type {
+    margin-bottom: 10px;
+}
+
+
+/* SELECT FIX */
+.auth-box select {
+    background: white;
+    color: #020617;
+    cursor: pointer;
+}
+
+/* BUTTON */
+.auth-box button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(90deg, #38bdf8, #a78bfa);
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.auth-box button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(56,189,248,0.4);
+}
+
+/* SWITCH LINK */
+.switch {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.switch a {
+    color: #38bdf8;
+    text-decoration: none;
+}
+.alert {
+    margin-bottom: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.alert.error {
+    background: #dc2626;
+    color: #fff;
+}
+
+.alert.warning {
+    background: #facc15;
+    color: #020617;
+}
+
+.alert.success {
+    background: #22c55e;
+    color: #020617;
+}
+
+
+/* ERROR MESSAGE */
+.error {
+    color: #ff6b6b;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .register-box {
+        width: 90%;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}

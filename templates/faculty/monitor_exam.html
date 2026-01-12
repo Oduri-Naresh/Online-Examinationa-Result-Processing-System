@@ -1,0 +1,25 @@
+<h2>👁 Monitoring: {{ exam.title }}</h2>
+
+<table>
+<tr>
+    <th>Student</th>
+    <th>Violations</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for a in attempts %}
+<tr>
+    <td>{{ a.student.user.username }}</td>
+    <td>{{ a.violations }}</td>
+    <td>
+        {% if a.is_submitted %} Submitted {% else %} In Progress {% endif %}
+    </td>
+    <td>
+        {% if not a.is_submitted %}
+            <a href="{% url 'force_submit' a.id %}">⚠ Force Submit</a>
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+</table>

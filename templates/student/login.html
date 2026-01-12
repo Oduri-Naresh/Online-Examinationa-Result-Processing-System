@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Login | ExamPortal</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- BACK → STUDENT REGISTRATION -->
+<a href="{% url 'student_register' %}" class="back-btn">← Back</a>
+
+<div class="auth-container">
+    <form method="POST" class="auth-box">
+        {% csrf_token %}
+
+        <h2>Student Login</h2>
+        <p class="subtitle">Login to your student account</p>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Login</button>
+
+        <p class="switch">
+            New Student?
+            <a href="{% url 'student_register' %}">Register here</a>
+        </p>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+
+{% load static %}
+
+{% block title %}{{ exam.title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/exam.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="exam-wrapper">
+
+    <!-- HEADER -->
+    <div class="exam-top">
+        <h2>{{ exam.title }}</h2>
+        <div class="timer">
+            ⏱ <span id="time">--:--</span>
+        </div>
+    </div>
+
+    <div class="exam-body">
+
+        <!-- QUESTION AREA -->
+        <form method="POST"
+      action="{% url 'submit_exam' attempt.id %}"
+      id="examForm"
+      class="question-area">
+
+            {% csrf_token %}
+
+            {% for q in questions %}
+            <div class="question-box {% if forloop.first %}active{% endif %}"
+                 data-index="{{ forloop.counter0 }}">
+
+                <h3>Q{{ forloop.counter }}. {{ q.text }}</h3>
+
+                <label><input type="radio" name="q{{ q.id }}" value="A"> {{ q.option_a }}</label>
+                <label><input type="radio" name="q{{ q.id }}" value="B"> {{ q.option_b }}</label>
+                <label><input type="radio" name="q{{ q.id }}" value="C"> {{ q.option_c }}</label>
+                <label><input type="radio" name="q{{ q.id }}" value="D"> {{ q.option_d }}</label>
+            </div>
+            {% endfor %}
+
+            <!-- NAVIGATION -->
+            <div class="nav-buttons">
+                <button type="button" id="prevBtn">⬅ Prev</button>
+                <button type="button" id="nextBtn">Next ➡</button>
+                <button type="submit" id="submitBtn" class="hidden">Submit Exam</button>
+            </div>
+        </form>
+
+        <!-- QUESTION PALETTE -->
+       <div class="palette">
+    {% for q in questions %}
+    <button type="button"
+            class="palette-btn"
+            data-index="{{ forloop.counter0 }}">
+        {{ forloop.counter }}
+    </button>
+    {% endfor %}
+</div>
+
+    </div>
+</div>
+
+{{ exam.duration|json_script:"exam-duration" }}
+
+<script>
+const duration = JSON.parse(
+    document.getElementById('exam-duration').textContent
+) * 60;
+</script>
+
+<script src="{% static 'js/exam.js' %}"></script>
+
+{% endblock %}

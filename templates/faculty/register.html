@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Registration | ExamPortal</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<a href="{% url 'home' %}" class="back-btn">← Back</a>
+
+<div class="auth-container">
+    <form method="POST" class="auth-box register-box">
+        {% csrf_token %}
+
+        <h2>Faculty Registration</h2>
+        <p class="subtitle">Approval required before login</p>
+
+        {% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+        <div class="form-grid">
+            <input type="text" name="full_name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+
+            <input type="text" name="department" placeholder="Department" required>
+            <input type="text" name="username" placeholder="Username" required>
+        </div>
+
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+        <button type="submit">Register</button>
+
+        <p class="switch">
+            Already registered?
+            <a href="{% url 'faculty_login' %}">Login</a>
+        </p>
+    </form>
+</div>
+
+</body>
+</html>

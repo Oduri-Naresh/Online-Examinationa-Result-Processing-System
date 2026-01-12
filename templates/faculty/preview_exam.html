@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview</title>
+
+    <style>
+/* ===============================
+   PREVIEW EXAM PAGE
+================================ */
+
+.preview-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: white;
+    background-color: #4f46e5;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.exam-meta {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 25px;
+    font-size: 15px;
+    color: #374151;
+}
+
+.exam-meta span {
+    background: #f1f5f9;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* ===============================
+   QUESTION CARD
+================================ */
+.question-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.question-text {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #111827;
+    line-height: 1.5;
+}
+
+.q-number {
+    color: #4f46e5;
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+/* ===============================
+   OPTIONS
+================================ */
+.options {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px 0;
+}
+
+.options li {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.question-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.correct {
+    background: #dcfce7;
+    color: #166534;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.marks {
+    background: #e0e7ff;
+    color: #3730a3;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* ===============================
+   EMPTY STATE
+================================ */
+.empty {
+    text-align: center;
+    padding: 30px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* ===============================
+   MOBILE
+================================ */
+@media (max-width: 768px) {
+    .exam-meta {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .question-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+.back-btn {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    background: #5983dc;
+    color: #ffffff;
+    justify-content: end;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #374151;
+}
+
+
+
+    </style>
+
+
+</head>
+
+
+
+<body>
+    
+
+
+<h2 class="preview-title">Preview Exam: {{ exam.title }}</h2>
+
+
+<div class="exam-meta">
+    <span><b>Total Marks:</b> {{ exam.total_marks }}</span>
+    <span><b>Duration:</b> {{ exam.duration }} minutes</span>
+</div>
+
+<hr>
+
+{% for q in questions %}
+<div class="question-card">
+    <p class="question-text">
+        <span class="q-number">Q{{ forloop.counter }}.</span> {{ q.text }}
+    </p>
+
+    <ul class="options">
+        <li>A. {{ q.option_a }}</li>
+        <li>B. {{ q.option_b }}</li>
+        <li>C. {{ q.option_c }}</li>
+        <li>D. {{ q.option_d }}</li>
+    </ul>
+
+    <div class="question-footer">
+        <span class="correct">✔ Correct: {{ q.correct_answer }}</span>
+        <span class="marks">Marks: {{ q.marks }}</span>
+    </div>
+</div>
+{% empty %}
+<p class="empty">No questions added yet.</p>
+{% endfor %}
+<a href="{% url 'faculty_exams' %}" class="back-btn">⬅ Back to Exams</a>
+
+</body>
+</html>

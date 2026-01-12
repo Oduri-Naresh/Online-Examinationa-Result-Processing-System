@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty – Students</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #eeeff1;
+            padding: 30px;
+            color: #111827;
+        }
+
+        h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            background-color: #6656e5;
+            padding: 20px;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: end;
+            margin-bottom: 15px;
+        }
+        .back{
+         display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;   
+        }
+        .btn {
+            padding: 10px 16px;
+            background: #6b50f4;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn.secondary {
+            background: #6656e5;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        thead {
+            background: #f3f4f6;
+        }
+
+        th {
+            padding: 14px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #0a0b0e;
+            font-size: 14px;
+            background-color: #7c6cf0;
+        }
+
+        td {
+            padding: 14px;
+            border: 1px solid #0a0b0e;
+            font-size: 14px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>👥 Student List</h2>
+
+<div class="actions">
+    <a href="{% url 'download_students_pdf' %}" class="btn" target="_blank">
+        📄 Download PDF
+    </a>
+
+   
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Reg No</th>
+            <th>Avg Pass %</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in student_data %}
+        <tr>
+            <td>{{ item.student.full_name }}</td>
+            <td>{{ item.student.department }}</td>
+            <td>{{ item.student.student_id }}</td>
+            <td>{{ item.avg_pass }}%</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="empty">No students found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="back">
+     <a href="{% url 'faculty_dashboard' %}" class="btn secondary">
+        ⬅ Back to Dashboard
+    </a>
+</div>
+
+</body>
+</html>

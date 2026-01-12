@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/faculty_dashboard.css' %}">
+<style>
+    .layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 230px;
+    background: #784cef;
+    padding: 25px;
+    border-radius: 8px;
+    color: white;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px;
+    margin-bottom: 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.sidebar a:hover {
+    background: #402087;
+}
+
+.logout {
+    margin-top: 40px;
+    background-color: white;
+}
+.content {
+    flex: 1;
+    padding: 30px;
+    background: #f4f6fb;
+}
+
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>👨‍🏫 Faculty</h2>
+
+        <a href="{% url 'faculty_dashboard' %}">📊 Dashboard</a>
+        <a href="{% url 'faculty_students' %}">👥 Students</a>
+        <a href="{% url 'faculty_exams' %}">📝 Exams</a>
+        <a href="{% url 'faculty_profile' %}">👤 Profile</a>
+        <a href="{% url 'logout' %}" class="logout">🚪 Logout</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+        <h2>Dashboard Overview</h2>
+
+        <div class="cards">
+            <div class="card">Total Exams <b>{{ total_exams }}</b></div>
+            <div class="card">Active Exams <b>{{ active_exams }}</b></div>
+            <div class="card">Completed Exams <b>{{ completed_exams }}</b></div>
+            <div class="card">Avg Pass % <b>{{ avg_pass }}%</b></div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,449 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Questions</title>
+
+    <style>
+        body {
+            background: #f5f7fb;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: rgb(91, 88, 250);
+        }
+
+        .question-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: 600;
+            margin-top: 15px;
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 90px;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-top: 8px;
+        }
+
+        .options-section {
+            margin-top: 25px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #eef2ff;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            border-color: #6366f1;
+        }
+
+        .option span {
+            font-weight: bold;
+            font-size: 16px;
+            width: 25px;
+        }
+
+        .option input[type="text"] {
+            flex: 1;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #bbb;
+            font-size: 14px;
+        }
+
+        .marks-box {
+            margin-top: 20px;
+        }
+
+        .marks-box input {
+            width: 150px;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-add {
+            background: #22c55e;
+            color: white;
+        }
+
+        .btn-save {
+            background: #4338ca;
+            color: white;
+        }
+        /* ===============================
+   ADDED QUESTIONS TABLE
+================================ */
+/* ===============================
+   FORCE TABLE RESET (IMPORTANT)
+================================ */
+table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+}
+
+th, td {
+    border: none !important;
+    padding: 14px 16px !important;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* ===============================
+   TABLE CONTAINER
+================================ */
+.table-container {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    overflow-x: auto;
+}
+
+/* ===============================
+   EXAM / QUESTION TABLE
+================================ */
+.exam-table {
+    width: 100%;
+    border-spacing: 0;
+    font-size: 15px;
+}
+
+.exam-table thead th {
+    background: #f1f5f9;
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.exam-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.exam-table tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.exam-table tbody tr:hover {
+    background: #f3f4f6;
+}
+
+/* ===============================
+   QUESTION COLUMN
+================================ */
+.question-text {
+    max-width: 450px;
+    line-height: 1.5;
+    color: #374151;
+}
+
+/* ===============================
+   BADGES
+================================ */
+.answer-badge {
+    background: #e0e7ff;
+    color: #3730a3;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13px;
+    display: inline-block;
+}
+
+.marks-badge {
+    background: #dcfce7;
+    color: #166534;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13px;
+    display: inline-block;
+}
+
+/* ===============================
+   ACTION BUTTONS
+================================ */
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn.small {
+    padding: 7px 12px;
+    font-size: 13px;
+}
+
+/* Button Colors */
+.blue {
+    background: #2563eb;
+    color: white;
+}
+
+.green {
+    background: #16a34a;
+    color: white;
+}
+
+.red {
+    background: #dc2626;
+    color: white;
+}
+
+.blue:hover,
+.green:hover,
+.red:hover {
+    opacity: 0.9;
+}
+
+/* ===============================
+   FINISH BAR
+================================ */
+.finish-bar {
+    margin-top: 25px;
+    padding: 18px 22px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.exam-info {
+    font-size: 15px;
+    color: #374151;
+}
+
+.primary-btn {
+    background: linear-gradient(90deg, #6366f1, #4f46e5);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.primary-btn:hover {
+    box-shadow: 0 10px 20px rgba(79,70,229,0.4);
+    transform: translateY(-2px);
+}
+
+/* ===============================
+   EMPTY STATE
+================================ */
+.empty {
+    text-align: center;
+    padding: 30px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+    .question-text {
+        max-width: none;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .finish-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>📝 Add Questions (Manual Exam)</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="question-card">
+
+            <label>Question *</label>
+            <textarea name="question_text" placeholder="Type the question clearly..." required></textarea>
+
+            <div class="options-section">
+                <label>Options (Select Correct Answer)</label>
+
+                <div class="option">
+                    <input type="radio" name="correct_answer" value="A" required>
+                    <span>A.</span>
+                    <input type="text" name="option_a" placeholder="Option A" required>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="correct_answer" value="B">
+                    <span>B.</span>
+                    <input type="text" name="option_b" placeholder="Option B" required>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="correct_answer" value="C">
+                    <span>C.</span>
+                    <input type="text" name="option_c" placeholder="Option C" required>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="correct_answer" value="D">
+                    <span>D.</span>
+                    <input type="text" name="option_d" placeholder="Option D" required>
+                </div>
+            </div>
+
+            <div class="marks-box">
+                <label>Marks *</label>
+                <input type="number" name="marks" min="1" required>
+            </div>
+
+        </div>
+
+        <div class="actions">
+            <button type="submit" name="add_another" class="btn btn-add">
+                ➕ Add Another
+            </button>
+
+            <button type="submit" name="finish_exam" class="btn btn-save">
+                ✅ Save & Finish
+            </button>
+        </div>
+
+    </form>
+</div>
+<h3 class="section-title">📋 Added Questions</h3>
+
+{% if questions %}
+<div class="table-container">
+    <table class="exam-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Question</th>
+                <th>Correct</th>
+                <th>Marks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for q in questions %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+
+                <td class="question-text">
+                    {{ q.text|truncatechars:70 }}
+                </td>
+
+                <td>
+                    <span class="answer-badge">
+                        {{ q.correct_answer }}
+                    </span>
+                </td>
+
+                <td>
+                    <span class="marks-badge">
+                        {{ q.marks }}
+                    </span>
+                </td>
+
+                <td class="actions">
+                    <a href="{% url 'edit_exam_question' exam.id q.id %}"
+                       class="btn small blue">✏️ Edit</a>
+
+                    <a href="{% url 'delete_exam_question' exam.id q.id %}"
+                       class="btn small red"
+                       onclick="return confirm('Delete this question?')">
+                       🗑 Delete
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p class="empty">No questions added yet.</p>
+{% endif %}
+
+<div class="finish-bar">
+    <div class="exam-info">
+        <b>Exam:</b> {{ exam.title }} |
+        <b>Total Marks:</b> {{ exam.total_marks }}
+    </div>
+
+    <a href="{% url 'faculty_exams' %}" class="btn primary-btn">
+        ✅ Finish Exam
+    </a>
+</div>
+
+
+</body>
+</html>

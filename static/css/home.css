@@ -1,0 +1,324 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #1e1b4b, #020617);
+    color: white;
+}
+
+/* ===== FORCE LINK RESET ===== */
+a,
+a:visited,
+a:hover,
+a:active {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 60px;
+    background: #090918;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* RIGHT SIDE */
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 26px;
+}
+
+
+/* HOME LINK */
+.nav-home {
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+}
+
+/* underline animation */
+.nav-home::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #38bdf8, #a78bfa);
+    transition: width 0.3s ease;
+}
+
+.nav-home:hover::after {
+    width: 100%;
+}
+/* =========================
+   LOGIN DROPDOWN (FIXED)
+========================= */
+.login-dropdown {
+    position: relative;
+    z-index: 1000;
+}
+
+
+/* LOGIN BUTTON */
+.login-btn {
+    background: linear-gradient(90deg, #38bdf8, #a78bfa);
+    color: #020617;
+    border: none;
+    padding: 10px 26px;
+    border-radius: 28px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    box-shadow: 0 0 20px rgba(56,189,248,0.7);
+    transform: translateY(-2px);
+}
+
+/* DROPDOWN MENU */
+.dropdown-menu {
+    position: absolute;
+    top: 58px;
+    right: 0;
+    width: 220px;
+    padding: 6px 0;
+    background: #020617;
+    border-radius: 14px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+    z-index: 2000;          /* VERY IMPORTANT */
+    pointer-events: auto;  /* ENABLE CLICKS */
+}
+
+/* DROPDOWN LINKS */
+/* DROPDOWN LINKS – FIXED SPACING */
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    padding: 14px 24px;          /* MORE LEFT/RIGHT SPACE */
+    font-size: 15px;
+    line-height: 1.6;
+    cursor: pointer;
+    pointer-events: auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Remove border from last item */
+.dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+/* Hover */
+.dropdown-menu a:hover {
+    background: rgba(255,255,255,0.12);
+}
+/* SHOW MENU WHEN ACTIVE */
+.login-dropdown.active .dropdown-menu {
+    display: flex;
+}
+
+
+
+
+/* HERO */
+.hero {
+    min-height: calc(100vh - 70px); /* subtract navbar height */
+    padding: 40px 70px 40px;        /* REDUCED top padding */
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+
+
+.badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    padding: 8px 18px;
+    border-radius: 30px;
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+.hero-left h1 {
+    font-size: 56px;
+    line-height: 1.15;
+}
+
+.hero-left h1 span {
+    background: linear-gradient(90deg, #38bdf8, #a78bfa);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero-left p {
+    margin: 30px 0;
+    font-size: 18px;
+    max-width: 600px;
+    opacity: 0.9;
+}
+
+/* HERO BUTTON CONTAINER */
+.hero-buttons {
+    margin-top: 35px;
+    display: flex;
+    gap: 22px;
+}
+
+/* COMMON BUTTON STYLE */
+.hero-buttons .btn {
+    padding: 16px 42px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* =========================
+   STUDENT LOGIN (FILLED)
+========================= */
+.hero-buttons .primary {
+    background: linear-gradient(90deg, #38bdf8, #a78bfa);
+    color: #020617;
+    box-shadow: 0 6px 22px rgba(56,189,248,0.5);
+}
+
+/* Student hover */
+.hero-buttons .primary:hover {
+    transform: translateY(-6px) scale(1.06);
+    background: linear-gradient(90deg, #0ea5e9, #8b5cf6);
+   
+}
+
+/* =========================
+   FACULTY LOGIN (OUTLINE)
+========================= */
+.hero-buttons .secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid rgba(255,255,255,0.75);
+}
+
+/* Faculty hover → FILL INSIDE */
+.hero-buttons .secondary:hover {
+    transform: translateY(-6px) scale(1.06);
+    background: linear-gradient(90deg, #38bdf8, #a78bfa);
+    color: #020617;
+    border-color: transparent;
+  
+}
+
+/* HERO IMAGE */
+.hero-right img {
+    width: 100%;
+    max-width: 480px;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* FEATURES */
+.features {
+    padding: 100px 60px;
+    text-align: center;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.04),
+        rgba(255,255,255,0.01)
+    );
+}
+
+.features-title {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.features-subtitle {
+    max-width: 720px;
+    margin: 0 auto 70px;
+    font-size: 17px;
+    opacity: 0.85;
+}
+
+/* GRID */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* FEATURE CARD */
+.feature-card {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 24px;
+    padding: 45px 30px;
+    min-height: 320px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.35s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+}
+
+.feature-icon {
+    font-size: 46px;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    font-size: 15px;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 25px;
+    font-size: 14px;
+    background: #020617;
+}
